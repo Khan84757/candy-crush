@@ -1,55 +1,82 @@
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    text-align: center;
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    background: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
+/* Game Container */
 #game-container {
-    display: inline-block;
-    background: #fff;
-    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    background: #ffffff;
+    border: 1px solid #ddd;
     border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
-#grid {
-    display: grid;
-    grid-template-columns: repeat(8, 60px);
-    grid-gap: 2px;
+/* Header */
+header {
+    padding: 20px;
+    background: #ff6b6b;
+    color: white;
+    border-bottom: 4px solid #e63946;
+}
+
+h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+/* Canvas */
+#game-canvas {
+    display: block;
     margin: 20px auto;
+    border: 1px solid #ddd;
+    background: #f1f1f1;
+    width: 100%;
+    max-width: 300px;
+    height: 400px;
 }
 
-.candy {
-    width: 60px;
-    height: 60px;
+/* Controls */
+#controls {
+    margin: 10px 0;
+}
+
+.color-btn {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
     border-radius: 5px;
-    background-size: cover;
     cursor: pointer;
+    color: white;
+    text-transform: uppercase;
 }
 
-.candy.red {
-    background-color: #ff4d4d;
+.red { background-color: #e63946; }
+.blue { background-color: #457b9d; }
+.green { background-color: #2a9d8f; }
+.yellow { background-color: #e9c46a; }
+
+/* Score & Timer */
+#score-container {
+    margin: 15px 0;
+    font-size: 18px;
 }
 
-.candy.yellow {
-    background-color: #ffeb3b;
-}
-
-.candy.green {
-    background-color: #4caf50;
-}
-
-.candy.blue {
-    background-color: #2196f3;
-}
-
-.candy.purple {
-    background-color: #9c27b0;
-}
-
-#score {
-    font-weight: bold;
-    font-size: 1.5rem;
+/* Footer / Ads */
+#ad-container {
+    padding: 10px;
+    background: #f0f0f0;
+    font-size: 14px;
+    border-top: 1px solid #ddd;
 }
