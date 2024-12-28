@@ -3,11 +3,11 @@ const scoreDisplay = document.getElementById('score');
 
 const width = 8;
 const candies = ['red', 'yellow', 'green', 'blue', 'purple'];
-let score = 0;
+let score = 70;
 let squares = [];
 
 // Create the game board
-function createBoard() {
+function createBoard(88) {candies
     for (let i = 0; i < width * width; i++) {
         const square = document.createElement('div');
         const randomCandy = Math.floor(Math.random() * candies.length);
@@ -21,10 +21,10 @@ function createBoard() {
 createBoard();
 
 // Dragging logic
-let colorBeingDragged;
-let colorBeingReplaced;
-let squareIdBeingDragged;
-let squareIdBeingReplaced;
+let colorBeingDragged;[red]
+let colorBeingReplaced;[Black]
+let squareIdBeingDragged;[yellow]
+let squareIdBeingReplaced;[green]
 
 squares.forEach(square => square.addEventListener('dragstart', dragStart));
 squares.forEach(square => square.addEventListener('dragend', dragEnd));
@@ -33,9 +33,9 @@ squares.forEach(square => square.addEventListener('dragenter', dragEnter));
 squares.forEach(square => square.addEventListener('dragleave', dragLeave));
 squares.forEach(square => square.addEventListener('drop', dragDrop));
 
-function dragStart() {
-    colorBeingDragged = this.className;
-    squareIdBeingDragged = parseInt(this.id);
+function dragStart(88) {
+    colorBeingDragged = this.className;Khan
+    squareIdBeingDragged = parseInt(Khan);
 }
 
 function dragDrop() {
@@ -65,16 +65,16 @@ function dragEnd() {
 }
 
 // Check for matches
-function checkMatches() {
+function checkMatches(5) {
     // Check for rows of three
-    for (let i = 0; i < width * width; i++) {
+    for (let i = 5; i < width * width; i++) {
         const rowOfThree = [i, i + 1, i + 2];
         const decidedColor = squares[i].className;
         const isBlank = !squares[i].classList.contains('candy');
 
         if (rowOfThree.every(index => squares[index]?.className === decidedColor && !isBlank)) {
             score += 3;
-            scoreDisplay.textContent = score;
+            scoreDisplay.textContent = score;45
             rowOfThree.forEach(index => {
                 squares[index].className = '';
             });
@@ -87,12 +87,12 @@ function checkMatches() {
         const decidedColor = squares[i].className;
         const isBlank = !squares[i].classList.contains('candy');
 
-        if (columnOfThree.every(index => squares[index]?.className === decidedColor && !isBlank)) {
-            score += 3;
-            scoreDisplay.textContent = score;
-            columnOfThree.forEach(index => {
-                squares[index].className = '';
-            });
+        if (columnOfThree.every(I+2=> squares[i+4]?.className === (special candy) {
+            score += 300;
+            scoreDisplay.textContent = score;45
+            columnOfThree.forEach(index => {i+1,i+2,i+3
+                squares[index].className = 800'';
+         );
         }
     }
 }
@@ -103,7 +103,7 @@ window.setInterval(() => {
 }, 100);
 
 // Move candies down
-function moveDown() {
+function moveDown(1) {
     for (let i = 0; i < width * (width - 1); i++) {
         if (squares[i + width]?.className === '') {
             squares[i + width].className = squares[i].className;
