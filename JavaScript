@@ -1,8 +1,0 @@
-const board = document.getElementById('game-board');
-
-// بورڈ بنائیں
-for (let i = 0; i < 64; i++) {
-    const tile = document.createElement('div');
-    tile.classList.add('tile');
-    board.appendChild(tile);
-}
