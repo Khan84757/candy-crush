@@ -1,0 +1,55 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+}
+
+#game-container {
+    display: inline-block;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: repeat(8, 60px);
+    grid-gap: 2px;
+    margin: 20px auto;
+}
+
+.candy {
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+    background-size: cover;
+    cursor: pointer;
+}
+
+.candy.red {
+    background-color: #ff4d4d;
+}
+
+.candy.yellow {
+    background-color: #ffeb3b;
+}
+
+.candy.green {
+    background-color: #4caf50;
+}
+
+.candy.blue {
+    background-color: #2196f3;
+}
+
+.candy.purple {
+    background-color: #9c27b0;
+}
+
+#score {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
