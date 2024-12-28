@@ -3,14 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Candy Crush Game</title>
+    <title>Candy Fill</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="game-container">
-        <h1>Candy Crush Game</h1>
-        <div id="grid"></div>
-        <p>Score: <span id="score">0</span></p>
+        <header>
+            <h1 id="game-title">Candy Fill</h1>
+            <p id="game-description">Fill the bottles with candy colors and score points!</p>
+        </header>
+        <main>
+            <canvas id="game-canvas"></canvas>
+            <div id="controls">
+                <button id="color-red" class="color-btn red">Red</button>
+                <button id="color-blue" class="color-btn blue">Blue</button>
+                <button id="color-green" class="color-btn green">Green</button>
+                <button id="color-yellow" class="color-btn yellow">Yellow</button>
+            </div>
+            <div id="score-container">
+                <p>Score: <span id="score">0</span></p>
+                <p>Level: <span id="level">1</span></p>
+                <p>Time Remaining: <span id="timer">60</span>s</p>
+            </div>
+        </main>
+        <footer>
+            <div id="ad-container">
+                <p>Ad Space: Insert AdSense code here.</p>
+            </div>
+        </footer>
     </div>
     <script src="script.js"></script>
 </body>
