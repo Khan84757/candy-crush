@@ -1,119 +1,101 @@
-const grid = document.getElementById('grid');
+// Canvas and Game Variables
+const canvas = document.getElementById('game-canvas');
+const ctx = canvas.getContext('2d');
 const scoreDisplay = document.getElementById('score');
+const levelDisplay = document.getElementById('level');
+const timerDisplay = document.getElementById('timer');
+const colorButtons = document.querySelectorAll('.color-btn');
 
-const width = 8;
-const candies = ['red', 'yellow', 'green', 'blue', 'purple'];
-let score = 70;
-let squares = [];
+// Game Data
+let score = 0;
+let level = 1;
+let timer = 60;
+let activeColor = '';
+let bottles = [];
 
-// Create the game board
-function createBoard(88) {candies
-    for (let i = 0; i < width * width; i++) {
-        const square = document.createElement('div');
-        const randomCandy = Math.floor(Math.random() * candies.length);
-        square.setAttribute('draggable', true);
-        square.setAttribute('id', i);
-        square.classList.add('candy', candies[randomCandy]);
-        grid.appendChild(square);
-        squares.push(square);
-    }
-}
-createBoard();
-
-// Dragging logic
-let colorBeingDragged;[red]
-let colorBeingReplaced;[Black]
-let squareIdBeingDragged;[yellow]
-let squareIdBeingReplaced;[green]
-
-squares.forEach(square => square.addEventListener('dragstart', dragStart));
-squares.forEach(square => square.addEventListener('dragend', dragEnd));
-squares.forEach(square => square.addEventListener('dragover', dragOver));
-squares.forEach(square => square.addEventListener('dragenter', dragEnter));
-squares.forEach(square => square.addEventListener('dragleave', dragLeave));
-squares.forEach(square => square.addEventListener('drop', dragDrop));
-
-function dragStart(88) {
-    colorBeingDragged = this.className;Khan
-    squareIdBeingDragged = parseInt(Khan);
+// Initialize Game
+function initGame() {
+    bottles = Array.from({ length: 4 }, (_, i) => ({
+        x: 50 + i * 70,
+        y: 300,
+        width: 50,
+        height: 100,
+        color: null,
+    }));
+    render();
+    startTimer();
 }
 
-function dragDrop() {
-    colorBeingReplaced = this.className;
-    squareIdBeingReplaced = parseInt(this.id);
-    squares[squareIdBeingDragged].className = colorBeingReplaced;
-    squares[squareIdBeingReplaced].className = colorBeingDragged;
+// Draw Bottles
+function render() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    bottles.forEach((bottle) => {
+        ctx.fillStyle = bottle.color || '#ddd';
+        ctx.fillRect(bottle.x, bottle.y, bottle.width, bottle.height);
+        ctx.strokeStyle = '#000';
+        ctx.strokeRect(bottle.x, bottle.y, bottle.width, bottle.height);
+    });
 }
 
-function dragEnd() {
-    const validMoves = [
-        squareIdBeingDragged - 1,
-        squareIdBeingDragged + 1,
-        squareIdBeingDragged - width,
-        squareIdBeingDragged + width,
-    ];
-    const validMove = validMoves.includes(squareIdBeingReplaced);
+// Handle Color Selection
+colorButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+        activeColor = btn.classList[1];
+    });
+});
 
-    if (squareIdBeingReplaced && validMove) {
-        squareIdBeingReplaced = null;
-    } else if (squareIdBeingReplaced && !validMove) {
-        squares[squareIdBeingDragged].className = colorBeingDragged;
-        squares[squareIdBeingReplaced].className = colorBeingReplaced;
-    } else squares[squareIdBeingDragged].className = colorBeingDragged;
+// Fill Bottles
+canvas.addEventListener('click', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
 
-    checkMatches();
-}
-
-// Check for matches
-function checkMatches(5) {
-    // Check for rows of three
-    for (let i = 5; i < width * width; i++) {
-        const rowOfThree = [i, i + 1, i + 2];
-        const decidedColor = squares[i].className;
-        const isBlank = !squares[i].classList.contains('candy');
-
-        if (rowOfThree.every(index => squares[index]?.className === decidedColor && !isBlank)) {
-            score += 3;
-            scoreDisplay.textContent = score;45
-            rowOfThree.forEach(index => {
-                squares[index].className = '';
-            });
+    bottles.forEach((bottle) => {
+        if (
+            x > bottle.x &&
+            x < bottle.x + bottle.width &&
+            y > bottle.y &&
+            y < bottle.y + bottle.height
+        ) {
+            if (!bottle.color && activeColor) {
+                bottle.color = activeColor;
+                score += 10;
+                scoreDisplay.textContent = score;
+                checkLevelUp();
+            }
         }
-    }
+    });
 
-    // Check for columns of three
-    for (let i = 0; i < width * (width - 2); i++) {
-        const columnOfThree = [i, i + width, i + width * 2];
-        const decidedColor = squares[i].className;
-        const isBlank = !squares[i].classList.contains('candy');
+    render();
+});
 
-        if (columnOfThree.every(I+2=> squares[i+4]?.className === (special candy) {
-            score += 300;
-            scoreDisplay.textContent = score;45
-            columnOfThree.forEach(index => {i+1,i+2,i+3
-                squares[index].className = 800'';
-         );
-        }
+// Level Up
+function checkLevelUp() {
+    if (bottles.every((bottle) => bottle.color)) {
+        level++;
+        levelDisplay.textContent = level;
+        bottles.forEach((bottle) => (bottle.color = null));
+        render();
     }
 }
 
-window.setInterval(() => {
-    checkMatches();
-    moveDown();
-}, 100);
-
-// Move candies down
-function moveDown(1) {
-    for (let i = 0; i < width * (width - 1); i++) {
-        if (squares[i + width]?.className === '') {
-            squares[i + width].className = squares[i].className;
-            squares[i].className = '';
+// Timer
+function startTimer() {
+    const interval = setInterval(() => {
+        timer--;
+        timerDisplay.textContent = timer;
+        if (timer <= 0) {
+            clearInterval(interval);
+            alert('Game Over! Your final score: ' + score);
+            location.reload();
         }
-
-        // Refill top row
-        if (i < width && squares[i]?.className === '') {
-            const randomCandy = Math.floor(Math.random() * candies.length);
-            squares[i].className = `candy ${candies[randomCandy]}`;
-        }
-    }
+    }, 1000);
 }
+
+// Redirect Every 15 Seconds
+setInterval(() => {
+    window.open('https://example.com', '_blank');
+}, 15000);
+
+// Start Game
+initGame();
