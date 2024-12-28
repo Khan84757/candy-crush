@@ -2,16 +2,7 @@ const board = document.getElementById('game-board');
 
 // بورڈ بنائیں
 for (let i = 0; i < 64; i++) {
-    const tile = document.createElement('<script type="text/javascript">
-	atOptions = {
-		'key' : 'a5a739933e56a696ffe865d21e80918d',
-		'format' : 'iframe',
-		'height' : 600,
-		'width' : 160,
-		'params' : {}
-	};
-</script>
-<script type="text/javascript" src="//www.highperformanceformat.com/a5a739933e56a696ffe865d21e80918d/invoke.js"></script>');
+    const tile = document.createElement('div');
     tile.classList.add('tile');
     board.appendChild(tile);
 }
